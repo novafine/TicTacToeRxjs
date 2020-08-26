@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-gameboard',
+  selector: 'gameboard',
   templateUrl: './gameboard.component.html',
   styleUrls: ['./gameboard.component.scss']
 })
