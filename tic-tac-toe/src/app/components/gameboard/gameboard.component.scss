@@ -1,8 +1,7 @@
-$cell-side: 150px;
+$cell-side: 120px;
 
 .container {
     margin-top: 5%;
-    height: inherit;
 }
 
 .board {
@@ -23,4 +22,5 @@ $cell-side: 150px;
 .cell {
     width: $cell-side;
     height: $cell-side;
+    padding: 1px 1px 1px 1px;
 }
