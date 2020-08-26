@@ -7,6 +7,7 @@ import { GameboardComponent } from './components/gameboard/gameboard.component';
 import { GameboardCellComponent } from './components/gameboard-cell/gameboard-cell.component';
 import { HomeComponent } from './components/home/home.component';
 import { PlayAgainBtnComponent } from './components/play-again-btn/play-again-btn.component';
+import { WinsHistoryBoardComponent } from './components/wins-history-board/wins-history-board.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { PlayAgainBtnComponent } from './components/play-again-btn/play-again-bt
     GameboardComponent,
     GameboardCellComponent,
     HomeComponent,
-    PlayAgainBtnComponent
+    PlayAgainBtnComponent,
+    WinsHistoryBoardComponent
   ],
   imports: [
     BrowserModule,
