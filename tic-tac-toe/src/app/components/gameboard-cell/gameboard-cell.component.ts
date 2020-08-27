@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Player } from "../../types.type";
 
 @Component({
   selector: 'gameboard-cell',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gameboard-cell.component.scss']
 })
 export class GameboardCellComponent implements OnInit {
+
+  @Input() player: Player;
 
   constructor() { }
 
