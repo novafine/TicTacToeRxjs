@@ -15,6 +15,19 @@ export class WinsHistoryBoardComponent implements OnInit, OnDestroy {
   constructor() { }
 
   ngOnInit(): void {
+
+    this.winningsHistory$ = new Observable<string>(subscriber => {
+      subscriber.next("someone wins");
+      subscriber.next("another someone wins");
+      subscriber.next("wins");
+      subscriber.next("");
+      subscriber.next("someone wins");
+      subscriber.next("someone wins");
+      subscriber.next("someone wins");
+      setTimeout(() => { subscriber.next("timer") }, 3000);
+    });
+
+
     this.winningsSubscription = this.winningsHistory$.subscribe((observer) => {
       this.winningsList.push(observer);
     })
