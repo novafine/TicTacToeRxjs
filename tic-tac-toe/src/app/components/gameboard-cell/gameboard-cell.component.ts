@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Player } from "../../types.type";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'gameboard-cell',
