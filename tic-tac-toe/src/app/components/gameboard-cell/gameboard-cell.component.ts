@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class GameboardCellComponent implements OnInit {
 
   @Input() player: Player;
+  clicked = false;
 
   constructor() { }
 

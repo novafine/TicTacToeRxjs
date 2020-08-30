@@ -1,31 +1,25 @@
 import { Player } from "./types.type";
 
-class GameLogic {
-    private gameboard: string[][] = [["", "", ""], ["", "", ""], ["", "", ""]];
+export class GameLogic {
+    // changeCellValue(row: number, col: number, value: Player) {
+    //     gameboard[row][col] = value;
+    // }
 
-    changeCellValue(row: number, col: number, value: Player) {
-        this.gameboard[row][col] = value;
+    isWin(gameboard: string[][], player: Player) {
+        return (this.isRowSameSign(gameboard, player) ||
+            this.isColumnSameSign(gameboard, player) ||
+            this.isMainCrossSameSign(gameboard, player) ||
+            this.isSecondCrossSameSign(gameboard, player));
     }
 
-    isWin(player: Player) {
-        if (this.isRowSameSign(player) ||
-            this.isColumnSameSing(player) ||
-            this.isMainCrossSameSign(player) ||
-            this.isSecondCrossSameSign(player)) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private isRowSameSign(player: Player) {
+    private isRowSameSign(gameboard: string[][], player: Player) {
         let isRowSame: Boolean;
 
-        for (let i = 0; i < this.gameboard.length; i++) {
+        for (let i = 0; i < gameboard.length; i++) {
             isRowSame = true;
 
-            for (let j = 0; j < this.gameboard[0].length; j++) {
-                if (this.gameboard[i][j] !== player) {
+            for (let j = 0; j < gameboard[0].length; j++) {
+                if (gameboard[i][j] !== player) {
                     isRowSame = false;
                 }
             }
@@ -38,14 +32,14 @@ class GameLogic {
         return false;
     }
 
-    private isColumnSameSing(player: Player) {
+    private isColumnSameSign(gameboard: string[][], player: Player) {
         let isColSame: Boolean;
 
-        for (let i = 0; i < this.gameboard.length; i++) {
+        for (let i = 0; i < gameboard.length; i++) {
             isColSame = true;
 
-            for (let j = 0; j < this.gameboard[0].length; j++) {
-                if (this.gameboard[j][i] !== player) {
+            for (let j = 0; j < gameboard[0].length; j++) {
+                if (gameboard[j][i] !== player) {
                     isColSame = false;
                 }
             }
@@ -58,11 +52,11 @@ class GameLogic {
         return false;
     }
 
-    private isMainCrossSameSign(player: Player) {
+    private isMainCrossSameSign(gameboard: string[][], player: Player) {
 
-        for (let i = 0; i < this.gameboard.length; i++) {
+        for (let i = 0; i < gameboard.length; i++) {
 
-            if (this.gameboard[i][i] !== player) {
+            if (gameboard[i][i] !== player) {
                 return false;
             }
         }
@@ -70,10 +64,10 @@ class GameLogic {
         return true;
     }
 
-    private isSecondCrossSameSign(player: Player) {
-        for (let i = 0; i < this.gameboard.length; i++) {
+    private isSecondCrossSameSign(gameboard: string[][], player: Player) {
+        for (let i = 0; i < gameboard.length; i++) {
 
-            if (this.gameboard[i][this.gameboard.length - 1 - i] !== player) {
+            if (gameboard[i][gameboard.length - 1 - i] !== player) {
                 return false;
             }
         }
