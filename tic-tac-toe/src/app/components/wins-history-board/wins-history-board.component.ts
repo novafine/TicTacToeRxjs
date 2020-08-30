@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable, Subscription, interval, timer } from 'rxjs';
 
 @Component({
@@ -8,7 +8,7 @@ import { Observable, Subscription, interval, timer } from 'rxjs';
 })
 export class WinsHistoryBoardComponent implements OnInit, OnDestroy {
 
-  winningsHistory$: Observable<string>;
+  @Input() winningsHistory$: Observable<string>;
   winningsSubscription: Subscription;
   winningsList: string[] = [];
 
@@ -16,16 +16,16 @@ export class WinsHistoryBoardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.winningsHistory$ = new Observable<string>(subscriber => {
-      subscriber.next("someone wins");
-      subscriber.next("another someone wins");
-      subscriber.next("wins");
-      subscriber.next("");
-      subscriber.next("someone wins");
-      subscriber.next("someone wins");
-      subscriber.next("someone wins");
-      setTimeout(() => { subscriber.next("timer") }, 3000);
-    });
+    // this.winningsHistory$ = new Observable<string>(subscriber => {
+    //   subscriber.next("someone wins");
+    //   subscriber.next("another someone wins");
+    //   subscriber.next("wins");
+    //   subscriber.next("");
+    //   subscriber.next("someone wins");
+    //   subscriber.next("someone wins");
+    //   subscriber.next("someone wins");
+    //   setTimeout(() => { subscriber.next("timer") }, 3000);
+    // });
 
 
     this.winningsSubscription = this.winningsHistory$.subscribe((observer) => {
