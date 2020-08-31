@@ -3,30 +3,41 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GameLogic {
-    gameboard: string[][] = [["", "", ""], ["", "", ""], ["", "", ""]];
+    gameboard: string[][] = [[undefined, undefined, undefined], [undefined, undefined, undefined], [undefined, undefined, undefined]];
     player: Player = "X";
+    winner: Player = undefined;
+
+    resetGameboard() {
+        this.gameboard = [[undefined, undefined, undefined], [undefined, undefined, undefined], [undefined, undefined, undefined]];
+        this.player = "X";
+        this.winner = undefined;
+    }
 
     updateGameboard(row: number, col: number) {
         this.gameboard[row][col] = this.player;
-        
-        if (!this.isWin(this.gameboard, this.player)) {
+
+        if (!this.isWin()) {
             this.player = this.player === "X" ? "O" : "X";
             console.log(this.gameboard);
 
         } else {
             console.log(this.gameboard, "win!");
+            this.winner = this.player;
+            // TODO: emit winning
+
+            //TODO: tie case
         }
     }
 
-    isWin(gameboard: string[][], player: Player) {
-        return (this.isRowSameSign(gameboard, player) ||
-            this.isColumnSameSign(gameboard, player) ||
-            this.isMainCrossSameSign(gameboard, player) ||
-            this.isSecondCrossSameSign(gameboard, player));
+    isWin() {
+        return (this.isRowSameSign(this.gameboard, this.player) ||
+            this.isColumnSameSign(this.gameboard, this.player) ||
+            this.isMainCrossSameSign(this.gameboard, this.player) ||
+            this.isSecondCrossSameSign(this.gameboard, this.player));
     }
 
     private isRowSameSign(gameboard: string[][], player: Player) {
-        let isRowSame: Boolean;
+        let isRowSame: boolean;
 
         for (let i = 0; i < gameboard.length; i++) {
             isRowSame = true;
@@ -46,7 +57,7 @@ export class GameLogic {
     }
 
     private isColumnSameSign(gameboard: string[][], player: Player) {
-        let isColSame: Boolean;
+        let isColSame: boolean;
 
         for (let i = 0; i < gameboard.length; i++) {
             isColSame = true;

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Observable, Subscription, interval, timer } from 'rxjs';
+import { Observable, Subscription, interval, timer, BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'wins-history-board',
@@ -8,7 +8,7 @@ import { Observable, Subscription, interval, timer } from 'rxjs';
 })
 export class WinsHistoryBoardComponent implements OnInit, OnDestroy {
 
-  @Input() winningsHistory$: Observable<string>;
+  @Input() winningsHistory$: Subject<string>;
   winningsSubscription: Subscription;
   winningsList: string[] = [];
 
@@ -16,21 +16,10 @@ export class WinsHistoryBoardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    // this.winningsHistory$ = new Observable<string>(subscriber => {
-    //   subscriber.next("someone wins");
-    //   subscriber.next("another someone wins");
-    //   subscriber.next("wins");
-    //   subscriber.next("");
-    //   subscriber.next("someone wins");
-    //   subscriber.next("someone wins");
-    //   subscriber.next("someone wins");
-    //   setTimeout(() => { subscriber.next("timer") }, 3000);
-    // });
-
-
     this.winningsSubscription = this.winningsHistory$.subscribe((observer) => {
       this.winningsList.push(observer);
     })
+    this.winningsHistory$.next("stam")
   }
 
   ngOnDestroy(): void {

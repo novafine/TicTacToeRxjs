@@ -1,24 +1,29 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Observable, Subscriber, Subscription, of, concat } from 'rxjs';
+import { Observable, Subscriber, Subscription, of, concat, BehaviorSubject, Subject } from 'rxjs';
+import { GameLogic } from 'src/app/game.service';
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
 
   // stream of turns to message whose turn it is now
   // isWin observable of true and false
-  winnings$: Observable<string>;
+  winnings$: Subject<string>;
 
-  constructor() { }
+  constructor(public gameboardService: GameLogic) { }
 
   ngOnInit(): void {
-    this.winnings$ = of("wellooo", "what");
+    // this.winnings$ = of("wellooo", "what", this.gameboardService.winner);
+    // this.winnings$ = new Observable<string>((subscriber) => {
+    //   subscriber.next(this.gameboardService.winner);
+    // })
+    this.winnings$ = new Subject<string>();
   }
 
-  ngAfterViewInit(): void {
-    this.winnings$ = concat(this.winnings$, of("stam"));
+  onGameOver(winner: string) {
+    this.winnings$.next(winner);
   }
 }
