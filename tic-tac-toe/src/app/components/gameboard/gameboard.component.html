@@ -1,20 +1,6 @@
 <div class="board">
-    <div *ngFor="let row of gameboard" class="row">
-        <gameboard-cell *ngFor="let col of gameboard" class="cell" [player]="'O'"></gameboard-cell>
+    <div *ngFor="let row of gameboardService.gameboard; let i = index" class="row">
+        <gameboard-cell *ngFor="let col of gameboardService.gameboard; let j = index" class="cell" [row]="i" [col]="j"
+            [player]="gameboardService.gameboard[i][j]" (click)="markCell(i, j)"></gameboard-cell>
     </div>
-    <!-- <div class="row">
-        <gameboard-cell class="cell" [player]="'O'"></gameboard-cell>
-        <gameboard-cell class="cell"[player]="'O'"></gameboard-cell>
-        <gameboard-cell class="cell"[player]="'O'"></gameboard-cell>
-    </div>
-    <div class="row">
-        <gameboard-cell class="cell"[player]="'X'"></gameboard-cell>
-        <gameboard-cell class="cell"[player]="'X'"></gameboard-cell>
-        <gameboard-cell class="cell"></gameboard-cell>
-    </div>
-    <div class="row">
-        <gameboard-cell class="cell"></gameboard-cell>
-        <gameboard-cell class="cell"></gameboard-cell>
-        <gameboard-cell class="cell"></gameboard-cell>
-    </div> -->
 </div>

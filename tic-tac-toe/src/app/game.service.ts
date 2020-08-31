@@ -1,9 +1,22 @@
 import { Player } from "./types.type";
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class GameLogic {
-    // changeCellValue(row: number, col: number, value: Player) {
-    //     gameboard[row][col] = value;
-    // }
+    gameboard: string[][] = [["", "", ""], ["", "", ""], ["", "", ""]];
+    player: Player = "X";
+
+    updateGameboard(row: number, col: number) {
+        this.gameboard[row][col] = this.player;
+        
+        if (!this.isWin(this.gameboard, this.player)) {
+            this.player = this.player === "X" ? "O" : "X";
+            console.log(this.gameboard);
+
+        } else {
+            console.log(this.gameboard, "win!");
+        }
+    }
 
     isWin(gameboard: string[][], player: Player) {
         return (this.isRowSameSign(gameboard, player) ||

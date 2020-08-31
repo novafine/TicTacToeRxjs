@@ -11,7 +11,7 @@ export class GameboardCellComponent implements OnInit {
 
   @Input() player: Player;
   clicked = false;
-
+  
   constructor() { }
 
   ngOnInit(): void {

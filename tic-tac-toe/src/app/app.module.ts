@@ -8,6 +8,7 @@ import { GameboardCellComponent } from './components/gameboard-cell/gameboard-ce
 import { HomeComponent } from './components/home/home.component';
 import { PlayAgainBtnComponent } from './components/play-again-btn/play-again-btn.component';
 import { WinsHistoryBoardComponent } from './components/wins-history-board/wins-history-board.component';
+import { GameLogic } from './game.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { WinsHistoryBoardComponent } from './components/wins-history-board/wins-
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [GameLogic],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
