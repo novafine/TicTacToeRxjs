@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Observable, Subscriber, Subscription, of, concat, BehaviorSubject, Subject } from 'rxjs';
 import { GameLogic } from 'src/app/game.service';
+import { Player, Winner } from 'src/app/types.type';
 
 @Component({
   selector: 'home',
@@ -12,6 +13,7 @@ export class HomeComponent implements OnInit {
   // stream of turns to message whose turn it is now
   // isWin observable of true and false
   winnings$: Subject<string>;
+  player: Player = "X";
 
   constructor(public gameboardService: GameLogic) { }
 

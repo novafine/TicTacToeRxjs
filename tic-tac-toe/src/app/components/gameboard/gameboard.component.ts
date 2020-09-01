@@ -12,14 +12,14 @@ import { GameLogic } from '../../game.service';
 export class GameboardComponent implements OnInit {
 
   @ViewChildren(GameboardCellComponent) cells: QueryList<GameboardCellComponent>;
-  @Output() winnerExists: EventEmitter<Winner> = new EventEmitter<Winner>();;
+  @Output() winnerExists: EventEmitter<string> = new EventEmitter<string>();;
   // winners$: Subject<Winner> = new Subject<Winner>();
-  player$: Observable<Player> = new Observable<Player>((subscriber) => {
-    // Init value
-    subscriber.next("X");
-    subscriber.error(console.error);
-    subscriber.complete();
-  });
+  // player$: Observable<Player> = new Observable<Player>((subscriber) => {
+  //   // Init value
+  //   subscriber.next("X");
+  //   subscriber.error(console.error);
+  //   subscriber.complete();
+  // });
 
   constructor(public gameboardService: GameLogic) { }
 
@@ -32,8 +32,8 @@ export class GameboardComponent implements OnInit {
       this.cells.forEach((cell) => {
         cell.clicked = true;
       })
-      
-      this.winnerExists.emit(this.gameboardService.getWinner());
+
+      this.winnerExists.emit(this.gameboardService.getWinnerMessage());
     }
   }
 

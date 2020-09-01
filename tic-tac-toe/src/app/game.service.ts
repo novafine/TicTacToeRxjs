@@ -37,8 +37,20 @@ export class GameLogic {
         }
     }
 
-    getWinner(): Winner {
-        return this.winner;
+    getCurrentPlayer() {
+        return this.player;
+    }
+
+    getWinnerMessage(): string {
+        if (this.winner) {
+            if (this.winner === "tie") {
+                return "it's a tie!";
+            }
+
+            return `${this.winner} won!`;
+        }
+
+        return undefined;
     }
 
     private isTie() {
