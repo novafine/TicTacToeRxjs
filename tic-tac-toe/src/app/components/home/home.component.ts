@@ -28,4 +28,8 @@ export class HomeComponent implements OnInit {
   onGameOver(event) {
     this.winnings$.next(event);
   }
+
+  resetGame() {
+    this.gameboardService.resetGameboard();
+  }
 }
