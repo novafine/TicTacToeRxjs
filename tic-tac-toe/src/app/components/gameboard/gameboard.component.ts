@@ -27,6 +27,7 @@ export class GameboardComponent implements OnInit {
   }
 
   markCell(row: number, col: number) {
+    //subject -> next
     // this.winners$.next(this.gameboardService.isGameOver(row, col));
     if (this.gameboardService.isGameOver(row, col)) {
       this.cells.forEach((cell) => {
@@ -36,5 +37,9 @@ export class GameboardComponent implements OnInit {
       this.winnerExists.emit(this.gameboardService.getWinnerMessage());
     }
   }
+
+  // cell click:
+  // update gameboard -> stateCheck -> win -> history
+  // 
 
 }
