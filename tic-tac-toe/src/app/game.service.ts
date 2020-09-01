@@ -1,35 +1,51 @@
-import { Player } from "./types.type";
+import { Player, Winner } from "./types.type";
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GameLogic {
     gameboard: string[][] = [[undefined, undefined, undefined], [undefined, undefined, undefined], [undefined, undefined, undefined]];
+    numOfMarkedCells: number = 0;
     player: Player = "X";
-    winner: Player = undefined;
+    winner: Winner = undefined;
 
     resetGameboard() {
         this.gameboard = [[undefined, undefined, undefined], [undefined, undefined, undefined], [undefined, undefined, undefined]];
+        this.numOfMarkedCells = 0;
         this.player = "X";
         this.winner = undefined;
     }
 
-    updateGameboard(row: number, col: number) {
+    isGameOver(row: number, col: number): boolean {
         this.gameboard[row][col] = this.player;
+        this.numOfMarkedCells++;
 
         if (!this.isWin()) {
+
+            // Checking case of tie
+            if (this.isTie()) {
+                this.winner = "tie";
+                return true;
+            }
+
+            // No tie
             this.player = this.player === "X" ? "O" : "X";
-            console.log(this.gameboard);
-
+            return false;
         } else {
-            console.log(this.gameboard, "win!");
             this.winner = this.player;
-            // TODO: emit winning
-
-            //TODO: tie case
+            console.log(this.gameboard, "win!");
+            return true;
         }
     }
 
-    isWin() {
+    getWinner(): Winner {
+        return this.winner;
+    }
+
+    private isTie() {
+        return this.numOfMarkedCells === (this.gameboard.length * this.gameboard[0].length);
+    }
+
+    private isWin() {
         return (this.isRowSameSign(this.gameboard, this.player) ||
             this.isColumnSameSign(this.gameboard, this.player) ||
             this.isMainCrossSameSign(this.gameboard, this.player) ||

@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     this.winnings$ = new Subject<string>();
   }
 
-  onGameOver(winner: string) {
-    this.winnings$.next(winner);
+  onGameOver(event) {
+    this.winnings$.next(event);
   }
 }
