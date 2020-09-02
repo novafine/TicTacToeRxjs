@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit {
   // stream of turns to message whose turn it is now
   // isWin observable of true and false
   winnings$: Subject<string>;
-  player: Player = "X";
 
   constructor(public gameboardService: GameLogic) { }
 

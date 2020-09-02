@@ -19,7 +19,6 @@ export class WinsHistoryBoardComponent implements OnInit, OnDestroy {
     this.winningsSubscription = this.winningsHistory$.subscribe((observer) => {
       this.winningsList.push(observer);
     })
-    this.winningsHistory$.next("stam")
   }
 
   ngOnDestroy(): void {

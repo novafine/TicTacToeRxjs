@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 import { Player, Winner } from 'src/app/types.type';
 import { GameboardCellComponent } from '../gameboard-cell/gameboard-cell.component';
 import { GameLogic } from '../../game.service';
@@ -11,6 +12,7 @@ import { GameLogic } from '../../game.service';
 })
 export class GameboardComponent implements OnInit {
 
+  playTurn$: Subject<any> = new Subject();
   @ViewChildren(GameboardCellComponent) cells: QueryList<GameboardCellComponent>;
   @Output() winnerExists: EventEmitter<string> = new EventEmitter<string>();;
   // winners$: Subject<Winner> = new Subject<Winner>();
@@ -24,6 +26,33 @@ export class GameboardComponent implements OnInit {
   constructor(public gameboardService: GameLogic) { }
 
   ngOnInit(): void {
+    const markCell$ = this.playTurn$.pipe(
+      tap(move => {
+        move.gameboard[move.row][move.col] = move.player;
+      })
+    )
+
+    const gameState$ = markCell$.pipe(
+      map(move => {
+        // if (this.gameboardService.isWin(move.gameboard, move.player)) {
+        //   return this.gameboardService.getWinnerMessage();
+        // } else {
+        //   if (this.gameboardService.isTie()) {
+
+        //   }
+        //TODO: rewrite is game over
+        if (this.gameboardService.isGameOver()) {
+          return this.gameboardService.getWinnerMessage();
+        } else {
+          // return turn message
+        }
+      })
+    )
+      .subscribe();
+  }
+
+  playTurn(row, col, gameboard, player) {
+    this.playTurn$.next({ row, col, gameboard, player });
   }
 
   markCell(row: number, col: number) {
@@ -38,6 +67,9 @@ export class GameboardComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    
+  }
   // cell click:
   // update gameboard -> stateCheck -> win -> history
   // 

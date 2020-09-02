@@ -19,7 +19,7 @@ export class GameLogic {
         this.gameboard[row][col] = this.player;
         this.numOfMarkedCells++;
 
-        if (!this.isWin()) {
+        if (!this.isWin(this.gameboard, this.player)) {
 
             // Checking case of tie
             if (this.isTie()) {
@@ -53,15 +53,15 @@ export class GameLogic {
         return undefined;
     }
 
-    private isTie() {
+    public isTie() {
         return this.numOfMarkedCells === (this.gameboard.length * this.gameboard[0].length);
     }
 
-    private isWin() {
-        return (this.isRowSameSign(this.gameboard, this.player) ||
-            this.isColumnSameSign(this.gameboard, this.player) ||
-            this.isMainCrossSameSign(this.gameboard, this.player) ||
-            this.isSecondCrossSameSign(this.gameboard, this.player));
+    public isWin(gameboard: string[][], player: Player) {
+        return (this.isRowSameSign(gameboard, player) ||
+            this.isColumnSameSign(gameboard, player) ||
+            this.isMainCrossSameSign(gameboard, player) ||
+            this.isSecondCrossSameSign(gameboard, player));
     }
 
     private isRowSameSign(gameboard: string[][], player: Player) {
