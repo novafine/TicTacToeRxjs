@@ -2,13 +2,6 @@
     <div class="game">
         <h1>Welcome to Tic Tac Toe!</h1>
         <gameboard (winnerExists)="onGameOver($event)"></gameboard>
-        <ng-container *ngIf="!gameboardService.getWinnerMessage(); else gameOver">
-            <p>{{ gameboardService.getCurrentPlayer() }} turn now!</p>
-        </ng-container>
-        <ng-template #gameOver>
-            <play-again-btn (click)="resetGame()"></play-again-btn>
-            <p>{{ gameboardService.getWinnerMessage() }}</p>
-        </ng-template>
     </div>
     <div class="wins-history">
         <h1>Wins History:</h1>

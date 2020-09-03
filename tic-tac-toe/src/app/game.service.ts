@@ -3,58 +3,10 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GameLogic {
-    gameboard: string[][] = [[undefined, undefined, undefined], [undefined, undefined, undefined], [undefined, undefined, undefined]];
     numOfMarkedCells: number = 0;
-    player: Player = "X";
-    winner: Winner = undefined;
 
-    resetGameboard() {
-        this.gameboard = [[undefined, undefined, undefined], [undefined, undefined, undefined], [undefined, undefined, undefined]];
-        this.numOfMarkedCells = 0;
-        this.player = "X";
-        this.winner = undefined;
-    }
-
-    isGameOver(row: number, col: number): boolean {
-        this.gameboard[row][col] = this.player;
-        this.numOfMarkedCells++;
-
-        if (!this.isWin(this.gameboard, this.player)) {
-
-            // Checking case of tie
-            if (this.isTie()) {
-                this.winner = "tie";
-                return true;
-            }
-
-            // No tie
-            this.player = this.player === "X" ? "O" : "X";
-            return false;
-        } else {
-            this.winner = this.player;
-            console.log(this.gameboard, "win!");
-            return true;
-        }
-    }
-
-    getCurrentPlayer() {
-        return this.player;
-    }
-
-    getWinnerMessage(): string {
-        if (this.winner) {
-            if (this.winner === "tie") {
-                return "it's a tie!";
-            }
-
-            return `${this.winner} won!`;
-        }
-
-        return undefined;
-    }
-
-    public isTie() {
-        return this.numOfMarkedCells === (this.gameboard.length * this.gameboard[0].length);
+    public isTie(board: string[][]) {
+        return this.numOfMarkedCells === (board.length * board[0].length);
     }
 
     public isWin(gameboard: string[][], player: Player) {

@@ -1,6 +1,19 @@
 <div class="board">
-    <div *ngFor="let row of gameboardService.gameboard; let i = index" class="row">
-        <gameboard-cell *ngFor="let col of gameboardService.gameboard; let j = index" class="cell" [row]="i" [col]="j"
-            [player]="gameboardService.gameboard[i][j]" (click)="markCell(i, j)"></gameboard-cell>
-    </div>
+    <ng-container *ngIf="player$ | async as player">
+        <ng-container *ngIf="gameboard$ | async as board">
+            <div *ngFor="let row of board; let i = index" class="row">
+                <gameboard-cell *ngFor="let col of board; let j = index" class="cell" [row]="i" [col]="j"
+                    [player]="board[i][j]" (click)="playTurn(i, j, board, player)"></gameboard-cell>
+            </div>
+            <br />
+            <div *ngIf="!winnerMessage; else playAgain">
+                {{player}} turn now!
+            </div>
+            <ng-template #playAgain>
+                <strong class="winner">{{ winnerMessage }}</strong>
+                <br />
+                <play-again-btn (click)="resetGame()"></play-again-btn>
+            </ng-template>
+        </ng-container>
+    </ng-container>
 </div>

@@ -10,25 +10,15 @@ import { Player, Winner } from 'src/app/types.type';
 })
 export class HomeComponent implements OnInit {
 
-  // stream of turns to message whose turn it is now
-  // isWin observable of true and false
   winnings$: Subject<string>;
 
   constructor(public gameboardService: GameLogic) { }
 
   ngOnInit(): void {
-    // this.winnings$ = of("wellooo", "what", this.gameboardService.winner);
-    // this.winnings$ = new Observable<string>((subscriber) => {
-    //   subscriber.next(this.gameboardService.winner);
-    // })
     this.winnings$ = new Subject<string>();
   }
 
-  onGameOver(event) {
+  onGameOver(event: string) {
     this.winnings$.next(event);
-  }
-
-  resetGame() {
-    this.gameboardService.resetGameboard();
   }
 }
